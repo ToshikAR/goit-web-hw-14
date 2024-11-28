@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+postgres-data/
 
 # C extensions
 *.so
@@ -24,6 +25,7 @@ share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+test.db
 MANIFEST
 
 # PyInstaller
@@ -37,7 +39,7 @@ pip-log.txt
 pip-delete-this-directory.txt
 
 # Unit test / coverage reports
-htmlcov/
+# htmlcov/
 .tox/
 .nox/
 .coverage
