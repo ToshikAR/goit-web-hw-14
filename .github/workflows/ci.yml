@@ -59,8 +59,8 @@ jobs:
       run: |
         source .venv/bin/activate
         pytest --cov
-  build-push-deploy-image:
-    runs-on: ubuntu-latest
+  # build-push-deploy-image:
+  #   runs-on: ubuntu-latest
 
 
 
