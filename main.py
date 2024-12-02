@@ -2,6 +2,7 @@ import logging
 import os
 from pathlib import Path
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi_limiter import FastAPILimiter
 import uvicorn
@@ -54,16 +55,21 @@ async def shutdown():
         logging.info("Redis client closed successfully.")
 
 
+@app.get("/favicon.ico")
+async def favicon():
+    return FileResponse(BASE_DIR / "src" / "static" / "favicon.ico")
+
+
 @app.get("/")
 def root():
     return {"message": "REST APP v1.0"}
 
 
-# if __name__ == "__main__":
-#     uvicorn.run(
-#         "main:app",
-#         host="0.0.0.0",
-#         port=int(os.environ.get("PORT", 8000)),
-#         reload=True,
-#         log_level="info",
-#     )
+if __name__ == "__main__":
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 8000)),
+        reload=True,
+        log_level="info",
+    )
