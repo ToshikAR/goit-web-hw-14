@@ -15,6 +15,7 @@ from src.app_users.services_auth import auth_service
 
 
 SQLALCHEMY_DATABASE_URL = "sqlite+aiosqlite:///./test.db"
+# SQLALCHEMY_DATABASE_URL = "postgresql+asyncpg://test_user:test_password@localhost/test_db"
 
 engine = create_async_engine(
     SQLALCHEMY_DATABASE_URL,
