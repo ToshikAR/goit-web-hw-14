@@ -28,8 +28,8 @@ jobs:
           --health-timeout=5s
           --health-retries=5
     env:
-      # DATABASE_URL: postgresql+asyncpg://test_user:test_password@localhost/test_db
-      # DATABASE_TEST_URL: postgresql+asyncpg://test_user:test_password@localhost/test_db
+      SQLALCHEMY_DB_URL: postgresql+asyncpg://test_user:test_password@localhost/test_db
+      DATABASE_TEST_URL: postgresql+asyncpg://test_user:test_password@localhost/test_db
       SQLALCHEMY_DATABASE_URL: sqlite+aiosqlite:///./test.db
       SECRET_KEY: supersecretkey
     steps:
