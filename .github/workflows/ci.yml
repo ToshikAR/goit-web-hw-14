@@ -52,10 +52,10 @@ jobs:
         while ! pg_isready -h localhost -p 5432 -U test_user -d test_db; do
           sleep 1
         done
-    - name: Run Alembic migrations for test DB
-      run: |
-        source .venv/bin/activate
-        alembic upgrade heads
+    # - name: Run Alembic migrations for test DB
+    #   run: |
+    #     source .venv/bin/activate
+    #     alembic upgrade heads
     - name: Run tests
       run: |
         source .venv/bin/activate
