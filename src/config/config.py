@@ -8,6 +8,8 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)s:     %(module)s - 
 
 class Settings(BaseSettings):
     SQLALCHEMY_DB_URL: str = "postgresql+psycopg2"
+    KOYEB_DB_URL: str = "postgresql+psycopg2"
+
     MYSQ_DB_URL: str = "mysql+aiomysql"
     SECRET_KEY_JWT: str = "123456789"
     ALGORITHM: str = "qwertyuiop"

@@ -15,7 +15,7 @@ class ContactSchema(BaseModel):
         min_length=3,
         max_length=15,
         description="Format +14445556677",
-        json_schema_extra="+14445556677",
+        example="+14445556677",
     )
     description: Optional[str] = Field(None, max_length=250)
     date_birth: Optional[date] = Field(None, description="Format YYYY-MM-DD")
