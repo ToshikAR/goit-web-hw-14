@@ -36,25 +36,21 @@ def redis_client():
 # создаем хешь юзира async ---------------------------------------
 async def user_cache(email: str, db: AsyncSession = Depends(get_db)):
     user_hash = email
-    cache = await get_redis_client()
-
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
-    user = await cache.get(user_hash)
-    if user is None:
-        print("User from database")
-        user = await repository_users.get_user_by_email(email, db)
+    try:
+        cache = await get_redis_client()
+        user = await cache.get(user_hash)
         if user is None:
-            raise credentials_exception
-        await cache.set(user_hash, pickle.dumps(user))
-        await cache.expire(user_hash, 300)
-    else:
-        print("User from cache")
-        user = pickle.loads(user)
-    return user
+            print("User from database")
+            user = await repository_users.get_user_by_email(email, db)
+            await cache.set(user_hash, pickle.dumps(user))
+            await cache.expire(user_hash, 300)
+        else:
+            print("User from cache")
+            user = pickle.loads(user)
+    except ValueError as err:
+        logging.error(f"Cache Error: {err}")
+    finally:
+        return user
 
 
 # создаем хешь юзира sync ---------------------------------------

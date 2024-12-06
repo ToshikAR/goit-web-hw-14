@@ -13,7 +13,7 @@ class RoleAccess:
         request: Request,
         user: User = Depends(auth_service.get_current_user),
     ):
-        print(user.role, self.allowed_roles)
+        # print(user.role, self.allowed_roles)
         if user.role not in self.allowed_roles:
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="FORBIDDEN")
 

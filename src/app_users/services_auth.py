@@ -13,6 +13,7 @@ from passlib.context import CryptContext
 from src.database.db import get_db
 from src.config.config import conf
 from src.app_users.services_cache import user_cache
+from src.app_users import repository_users
 
 
 class Auth:
@@ -76,7 +77,6 @@ class Auth:
             detail="Could not validate credentials",
             headers={"WWW-Authenticate": "Bearer"},
         )
-
         try:
             # Decode JWT
             payload = jwt.decode(token, self.SECRET_KEY, algorithms=[self.ALGORITHM])
@@ -91,6 +91,10 @@ class Auth:
 
         # создаем хешь юзира ---------------------------------------
         user = await user_cache(str(email), db)
+        user = await repository_users.get_user_by_email(email, db)
+        if user is None:
+            print("None")
+            raise credentials_exception
         return user
 
     # --------------------------- email -------------------------------
